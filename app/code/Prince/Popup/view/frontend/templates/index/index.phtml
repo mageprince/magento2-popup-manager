@@ -1,0 +1,213 @@
+<?php
+// $_helper = $this->helper('Prince\Popup\Helper\Data');
+
+// //$_helper->setCookie('testCookie', 1);
+
+// echo $_helper->getCookie('testCookie');
+
+// exit;
+
+?>
+
+
+<h3>Magnific Popup CSS3-based animation effects</h3>
+<div class="links">
+  <h4>Text-based:</h4>
+  <ul id="inline-popups">
+    <li><a href="#test-popup" data-effect="mfp-zoom-in">Zoom</a></li>
+    <li><a href="#test-popup" data-effect="mfp-newspaper">Newspaper</a></li>
+    <li><a href="#test-popup" data-effect="mfp-move-horizontal">Horizontal move</a></li>
+    <li><a href="#test-popup" data-effect="mfp-move-from-top">Move from top</a></li>
+    <li><a href="#test-popup" data-effect="mfp-3d-unfold">3d unfold</a></li>
+    <li><a href="#test-popup2" data-effect="mfp-zoom-out">Zoom-out</a></li>
+  </ul>
+  
+  <a href="#test-popup" class="hinge">Popup with "hinge" close effect</a> (based on animate.css)
+  
+  
+  <h4>Image-based:</h4>
+  <ul id="image-popups">
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-zoom-in">Zoom</a></li>
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-newspaper">Newspaper</a></li>
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-move-horizontal">Horizontal move</a></li>
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-move-from-top">Move from top</a></li>
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-3d-unfold">3d unfold</a></li>
+    <li><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg/800px-Prasat_Sikhoraphum_-_Sikhoraphum_edit1.jpg" data-effect="mfp-zoom-out">Zoom-out</a></li>
+  </ul>
+</div>
+<div class="bottom-text">
+<p>CSS effects are inspired by <a href="http://tympanus.net/Development/ModalWindowEffects/">article on Codrops</a> by Mary Lou, <a href="http://lab.hakim.se/avgrund/">Avgrund</a> experiment by <a href="http://twitter.com/hakimel">Hakim El Hattab</a> and <a href="http://daneden.me/animate/">animate.css</a> by <a href="https://twitter.com/_dte">Dan Eden</a>.</p>
+  <p>Magnific Popup on Github - <a href="https://github.com/dimsemenov/Magnific-Popup">https://github.com/dimsemenov/Magnific-Popup</a>,<br/> plugin homepage - <a href="http://dimsemenov.com/plugins/magnific-popup/">http://dimsemenov.com/plugins/magnific-popup/</a></p>
+</div>
+
+<!-- Popup itself -->
+<div id="test-popup" class="white-popup mfp-with-anim mfp-hide">You may put any HTML here. This is dummy copy. It is not meant to be read. It has been placed here solely to demonstrate the look and feel of finished, typeset text. Only for show. He who searches for meaning here will be sorely disappointed.</div>
+
+<div id="test-popup2" class="white-popup mfp-with-anim mfp-hide">asdasdhasjkdjkashgdjkhkajshdkhaskldhlkjalsdkahskldjahsjd</div>
+
+<script type="text/javascript">
+ requirejs(['jquery', 'popup' ],
+    function   ($, popup) {
+        $(document).ready(function(){
+
+// Inline popups
+$('#inline-popups').magnificPopup({
+  delegate: 'a',
+  removalDelay: 500, //delay removal by X to allow out-animation
+  callbacks: {
+    beforeOpen: function() {
+       this.st.mainClass = this.st.el.attr('data-effect');
+    }
+  },
+  midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+});
+
+
+// Image popups
+$('#image-popups').magnificPopup({
+  delegate: 'a',
+  type: 'image',
+  removalDelay: 500, //delay removal by X to allow out-animation
+  callbacks: {
+    beforeOpen: function() {
+      // just a hack that adds mfp-anim class to markup 
+       this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
+       this.st.mainClass = this.st.el.attr('data-effect');
+    }
+  },
+  closeOnContentClick: true,
+  midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
+});
+
+
+// Hinge effect popup
+$('a.hinge').magnificPopup({
+  mainClass: 'mfp-with-fade',
+  removalDelay: 1000, //delay removal by X to allow out-animation
+  callbacks: {
+    beforeClose: function() {
+        this.content.addClass('hinge');
+    }, 
+    close: function() {
+        this.content.removeClass('hinge'); 
+    }
+  },
+  midClick: true
+});
+
+
+
+
+
+
+
+/*****************************************************************/
+
+ $('.popup-link').magnificPopup({ 
+    removalDelay: 300,
+    type: 'image',
+    callbacks: {
+    beforeOpen: function() {
+       this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure animated ' + this.st.el.attr('data-effect'));
+    }
+  },
+  });
+
+
+
+
+    });
+});
+</script>
+
+
+
+
+<ul>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeIn">fadeIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeInDown">fadeInDown</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeInDownBig">fadeInDownBig</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeInLeft">fadeInLeft</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeInRight">fadeInRight</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="fadeInUp">fadeInUp</a></li>
+  
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="flip">flip</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="flipInX">flipInX</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="flipInY">flipInY</a></li>
+  
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="lightSpeedIn">lightSpeedIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="pulse">pulse</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rubberBand">rubberBand</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="shake">shake</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="tada">tada</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="wobble">wobble</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="swing">swing</a></li>
+  
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="bounceIn">bounceIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="bounceInDown">bounceInDown</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="bounceInLeft">bounceInLeft</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="bounceInRight">bounceInRight</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="bounceInUp">bounceInUp</a></li>
+ 
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rollIn">rollIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="zoomIn">zoomIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="zoomInDown">zoomInDown</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="zoomInLeft">zoomInLeft</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="zoomInRight">zoomInRight</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="zoomInUp">zoomInUp</a></li>
+  
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rotateIn">rotateIn</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rotateInDownLeft">rotateInDownLeft</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rotateInDownRight">rotateInDownRight</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rotateInUpLeft">rotateInUpLeft</a></li>
+  <li><a href="http://placehold.it/600x600" class="btn popup-link" data-effect="rotateInUpLeft">rotateInUpRight</a></li>
+  
+</ul>
+
+<ul>
+  <button id="open-popup">Open popup</button>
+
+<div id="my-popup" data-effect="rotateInUpLeft" class="mfp-hide white-popup">
+  Inline popup
+  adaskjdhkasjd
+  asdkjahsjkdsd
+  askdjsa
+  <b>asdasdas</b>
+</div>
+</ul>
+
+
+
+<style type="text/css">
+    #open-popup {padding:20px}
+.white-popup {
+  position: relative;
+  background: #FFF;
+  padding: 40px;
+  width: auto;
+  max-width: 200px;
+  margin: 20px auto;
+  text-align: center;
+}
+</style>
+<script type="text/javascript">
+ requirejs(['jquery', 'popup' ],
+    function   ($, popup) {
+        $(document).ready(function(){
+
+ $('.popup-link').magnificPopup({ 
+    removalDelay: 300,
+    type: 'image',
+    callbacks: {
+    beforeOpen: function() {
+       this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure animated ' + this.st.el.attr('data-effect'));
+    }
+  },
+  });
+
+
+
+
+    });
+});
+</script>

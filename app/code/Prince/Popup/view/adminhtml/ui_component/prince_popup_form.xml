@@ -1,0 +1,336 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">prince_popup_form.popup_form_data_source</item>
+			<item name="deps" xsi:type="string">prince_popup_form.popup_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="config" xsi:type="array">
+			<item name="dataScope" xsi:type="string">data</item>
+			<item name="namespace" xsi:type="string">prince_popup_form</item>
+		</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+		<item name="buttons" xsi:type="array">
+			<item name="back" xsi:type="string">Prince\Popup\Block\Adminhtml\Popup\Edit\BackButton</item>
+			<item name="delete" xsi:type="string">Prince\Popup\Block\Adminhtml\Popup\Edit\DeleteButton</item>
+			<item name="save" xsi:type="string">Prince\Popup\Block\Adminhtml\Popup\Edit\SaveButton</item>
+			<item name="save_and_continue" xsi:type="string">Prince\Popup\Block\Adminhtml\Popup\Edit\SaveAndContinueButton</item>
+		</item>
+	</argument>
+	<dataSource name="popup_form_data_source">
+		<argument name="dataProvider" xsi:type="configurableObject">
+			<argument name="class" xsi:type="string">Prince\Popup\Model\Popup\DataProvider</argument>
+			<argument name="name" xsi:type="string">popup_form_data_source</argument>
+			<argument name="primaryFieldName" xsi:type="string">popup_id</argument>
+			<argument name="requestFieldName" xsi:type="string">popup_id</argument>
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="submit_url" path="*/*/save" xsi:type="url"/>
+				</item>
+			</argument>
+		</argument>
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+	</dataSource>
+	<fieldset name="General">
+		<argument name="data" xsi:type="array">
+			<item name="config" xsi:type="array">
+				<item name="label" xsi:type="string"/>
+			</item>
+		</argument>
+		<!-- <field name="status">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">status</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="sortOrder" xsi:type="number">10</item>
+					<item name="dataScope" xsi:type="string">status</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+		</field> -->
+		<field name="status">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">category</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="label" xsi:type="string" translate="true">Enable</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="string">1</item>
+                        <item name="false" xsi:type="string">0</item>
+                    </item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="default" xsi:type="string">1</item>
+                </item>
+            </argument>
+        </field>
+		<field name="name">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Name</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">name</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="label" translate="true" xsi:type="string">Content</item>
+                    <item name="formElement" xsi:type="string">wysiwyg</item>
+                    <item name="template" xsi:type="string">ui/form/field</item>
+                    <item name="source" xsi:type="string">popup</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+		<field name="display">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Prince\Popup\Model\Popup\Form\Display</item>
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Display</item>
+                    <item name="component" xsi:type="string">Prince_Popup/js/form/element/options</item>
+					<item name="formElement" xsi:type="string">multiselect</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">display</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+
+        <field name="catalog">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Magento\Catalog\Ui\Component\Product\Form\Categories\Options</item>
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="label" xsi:type="string" translate="true">Select Category</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="dataScope" xsi:type="string">catalog</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Catalog/js/components/new-category</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">3</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                    <item name="listens" xsi:type="array">
+                        <item name="${ $.namespace }.${ $.namespace }:responseData" xsi:type="string">setParsed</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="product">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Products</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">popup</item>
+                    <item name="dataScope" xsi:type="string">product</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">2</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+        </field>
+
+        <!-- <field name="catalog">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Catalog</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">item</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="breakLine" xsi:type="boolean">true</item>
+                    <item name="visibleValue" xsi:type="string">3</item>
+                    <item name="visible" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field> -->
+        
+		<field name="position">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Prince\Popup\Model\Popup\Form\Position</item>
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">70</item>
+					<item name="label" translate="true" xsi:type="string">Position</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="formElement" xsi:type="string">select</item>
+					<item name="dataScope" xsi:type="string">position</item>
+                    <item name="default" xsi:type="string">middle-center</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="animation">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Prince\Popup\Model\Popup\Form\Animation</item>
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">80</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Animation</item>
+					<item name="formElement" xsi:type="string">select</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">animation</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="event">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">90</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Seconds After Page Loaded</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">event</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="cookie">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Cookie</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">cookie</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">true</item>
+                        <item name="validate-number" xsi:type="boolean">true</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="css">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">110</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Css</item>
+					<item name="formElement" xsi:type="string">input</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">css</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+		<field name="storeview">
+		    <argument name="data" xsi:type="array">
+		        <item name="options" xsi:type="object">Magento\Store\Model\ResourceModel\Store\Collection</item>
+		        <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">120</item>
+		            <item name="dataType" xsi:type="string">text</item>
+		            <item name="label" xsi:type="string" translate="true">Store View</item>
+		            <item name="formElement" xsi:type="string">multiselect</item>
+		            <item name="source" xsi:type="string">popup</item>
+		            <item name="dataScope" xsi:type="string">storeview</item>
+		            <item name="default" xsi:type="string">0</item>
+		            <item name="validation" xsi:type="array">
+		                <item name="required-entry" xsi:type="boolean">true</item>
+		            </item>
+		        </item>
+		    </argument>
+		</field>
+		<field name="customer_group">
+			<argument name="data" xsi:type="array">
+				<item name="options" xsi:type="object">Magento\Customer\Model\ResourceModel\Group\Collection</item>
+				<item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">130</item>
+					<item name="dataType" xsi:type="string">text</item>
+					<item name="label" translate="true" xsi:type="string">Customer Group</item>
+					<item name="formElement" xsi:type="string">multiselect</item>
+					<item name="source" xsi:type="string">popup</item>
+					<item name="dataScope" xsi:type="string">customer_group</item>
+					<item name="validation" xsi:type="array">
+						<item name="required-entry" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+		</field>
+        <field name="view">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">140</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">View</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">popup</item>
+                    <item name="dataScope" xsi:type="string">view</item>
+                    <item name="disabled" xsi:type="string">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="click">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">150</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" translate="true" xsi:type="string">Click</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">popup</item>
+                    <item name="dataScope" xsi:type="string">click</item>
+                    <item name="disabled" xsi:type="string">true</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">false</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+	</fieldset>
+</form>

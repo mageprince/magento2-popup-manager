@@ -1,0 +1,26 @@
+<?php $collection = $this->getCollection()->getLastItem(); ?>
+
+<?php if($collection->getData()): ?>
+
+<div id="catalog-popup" class="white-popup mfp-with-anim mfp-hide"><?php echo $collection->getContent() ?></div>
+
+<script type="text/javascript">
+ requirejs(['jquery', 'popup' ],
+    function ($, popup) {
+        $(document).ready(function(){
+
+
+          $.magnificPopup.open({
+            items: {
+              src: '#catalog-popup'
+              },
+              removalDelay: 500,
+              mainClass: '<?php echo $collection->getAnimation() ?>'
+            });
+
+
+    });
+});
+</script>
+
+<?php endif; ?>

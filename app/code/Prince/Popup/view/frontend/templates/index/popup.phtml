@@ -1,0 +1,51 @@
+<?php $_helper = $this->helper('Prince\Popup\Helper\Data'); ?>
+<?php $collection = $this->getCollection()->getLastItem(); ?>
+<?php $url = $this->getUrl('popup/ajax/click'); ?>
+<?php if($collection->getData()): ?>
+
+  <?php if(!$_helper->getCookie($collection->getId())): ?>
+
+    <div id="popup-content" class="popup-content mfp-with-anim" style="display:none"><?php echo $this->filterOutputHtml($collection->getContent()); ?></div>
+
+    <script type="text/javascript">
+      requirejs(['jquery', 'popup' ],
+        function ($, popup) {
+            $(document).ready(function(){
+
+              setTimeout(function(){
+
+                $.magnificPopup.open({
+                  items: {
+                    src: '#popup-content'
+                    },
+                    type: 'inline',
+                    removalDelay: 500,
+                    mainClass: '<?php echo $collection->getAnimation() ?> <?php echo $collection->getPosition() ?>'
+                  });
+                $('#popup-content').css('display','inline block');
+              }, <?php echo $_helper->getMilliseconds($collection->getEvent()) ?>);
+
+              
+            });
+
+            $('#popup-content').on('click', 'a', function(e) {
+                e.preventDefault();
+                var link = $(this).attr('href');
+                 $.ajax({
+                   url: '<?php echo $url ?>',
+                   type: "POST",
+                   data: {id:<?php echo $collection->getId() ?>,click:<?php echo $collection->getClick() ?>},
+                   dataType: 'json'
+                     }).done(function (data) {
+                        window.location.href = link;                         
+                  });
+            });
+
+        });
+    </script>
+
+    <?php $_helper->setCookie($collection->getId(), $collection->getCookie()); ?>
+    <?php $_helper->setCounter($collection->getId()); ?>
+  <?php endif; ?>
+
+<?php endif; ?>

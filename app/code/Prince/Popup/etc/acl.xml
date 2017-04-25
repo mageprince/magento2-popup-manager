@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Prince_Popup::popup" sortOrder="10" title="popup">
+					<resource id="Prince_Popup::popup_save" sortOrder="10" title="Save popup"/>
+					<resource id="Prince_Popup::popup_delete" sortOrder="20" title="Delete popup"/>
+					<resource id="Prince_Popup::popup_update" sortOrder="30" title="Update popup"/>
+					<resource id="Prince_Popup::popup_view" sortOrder="40" title="View popup"/>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>

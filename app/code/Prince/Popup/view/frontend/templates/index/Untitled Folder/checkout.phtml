@@ -1,0 +1,29 @@
+<?php echo "testing"; ?>
+<?php 
+echo "<pre>";
+
+print_r($this->getCollection()->getData()); 
+
+
+?>
+
+<div id="test-popup" class="white-popup mfp-with-anim mfp-hide">You may put any HTML here. This is dummy copy. It is not meant to be read. It has been placed here solely to demonstrate the look and feel of finished, typeset text. Only for show. He who searches for meaning here will be sorely disappointed.</div>
+
+<script type="text/javascript">
+ requirejs(['jquery', 'popup' ],
+    function ($, popup) {
+        $(document).ready(function(){
+
+
+          $.magnificPopup.open({
+            items: {
+              src: '#test-popup'
+              },
+              removalDelay: 500,
+              mainClass: 'mfp-move-horizontal'
+            });
+
+
+    });
+});
+</script>

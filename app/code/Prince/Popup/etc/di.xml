@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<virtualType name="Prince\Popup\Model\ResourceModel\Popup\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">prince_popup</argument>
+			<argument name="resourceModel" xsi:type="string">Prince\Popup\Model\ResourceModel\Popup\Collection</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="prince_popup_grid_data_source" xsi:type="string">Prince\Popup\Model\ResourceModel\Popup\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Prince\Popup\Block\Index\Home">
+	    <arguments>
+	        <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+	    </arguments>
+	</type>
+	<type name="Prince\Popup\Block\Index\Catalog">
+	    <arguments>
+	        <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+	    </arguments>
+	</type>
+	<type name="Prince\Popup\Block\Index\Cart">
+	    <arguments>
+	        <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+	    </arguments>
+	</type>
+	<type name="Prince\Popup\Block\Index\Checkout">
+	    <arguments>
+	        <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+	    </arguments>
+	</type>
+	<type name="Prince\Popup\Block\Index\Product">
+	    <arguments>
+	        <argument name="templateProcessor" xsi:type="object">Magento\Widget\Model\Template\Filter</argument>
+	    </arguments>
+	</type>
+</config>
